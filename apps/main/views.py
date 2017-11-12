@@ -7,7 +7,7 @@ from .models import Search
 
 def index(request):
     try:
-        request.session['currentUser']
+        request.session['currentUser'] == ''
     except:
         request.session['currentUser'] = ''
     if request.session['currentUser'] != '':
