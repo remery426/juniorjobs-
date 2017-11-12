@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Junior Job Finder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+    #error{
+      color: red
+    }
+    </style>
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      {% if request.session.currentUser %}
+      <a href="/logout">Logout</a>
+      {% endif %}
+      <div class="page-header">
+        <a href="/"><h1> Find Junior Roles </h1></a>
+      </div>
+      {% if request.session.currentUser %}
+      <p>{{userMessage}}</p>
+      {% endif %}
+      <p> Search for the junior role you want on one of the sites in the dropdown and then paste the url of the search results into the form below.  Your results should have a much higher concentration of roles that are actually junior. For best results, copy the url of the second page of search results. </p>
+      <form class="" action="/refineSearch" method="post">
+        {% csrf_token %}
+        Url:<input type="text" name="url" value="">
+        Site: <select type="text" name="site" value="">
+          <option value="Indeed">Indeed</option>
+          <option value="Ziprecruiter">ZipRecruiter</option>
+        </select>
+        <input type="submit" name="" value="submit">
+      </form>
+      <div id="error">
+        {% if messages %}
+          {% for message in messages %}
+          <p> {{message}}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+      (Depending on the size of search results, this could take awhile)
+      <p><a href="login/loginPage">{{message}}</a></p>
+      {% if request.session.currentUser %}
+      <h3> Your previous searchs: </h3>
+      {% for search in userSearch %}
+        <p><a href="/histSearch/{{search.id}}">{{search.searchText}}</a></p>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </body>
+</html>

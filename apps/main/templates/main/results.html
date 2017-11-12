@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Search Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="page-header">
+        <a href="/"><h1> Find Junior Roles </h1></a>
+      </div>
+      <a href="/">Back to Home</a>
+      <h2> Your Search Results: </h2>
+        <p> Original Results Count:{{original}}</p>
+        <p> Filtered Search Result Count: {{new}}</p>
+        {% for key, values in results.items %}
+        <p><a href="https://www.indeed.com{{values.0}}" target="_blank">{{key}} </a> at {{values.1}}</p>
+        {% endfor %}
+    </div>
+  </body>
+</html>

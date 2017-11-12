@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Junior Job Finder</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    #green {
+      color:green;
+    }
+    #red {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="page-header">
+      <a href="/"><h1> Find Junior Roles </h1></a>
+    </div>
+    <h2> Login </h2>
+    {% if not request.session.error %}
+    <div id="green">
+    {% if messages %}
+      {% for message in messages %}
+      <p> {{message}}</p>
+      {% endfor %}
+    {% endif %}
+  </div>
+  {% endif %}
+  {% if request.session.error %}
+  <div id="red">
+  {% if messages %}
+    {% for message in messages %}
+    <p> {{message}}</p>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endif %}
+    <p>Please login below:</p>
+    <form class="" action="login/login" method="post">
+      {% csrf_token %}
+      Email: <input type="text" name="logEmail" value=""></br>
+      Password: <input type="password" name="logPassword" value="">
+      <input type="submit" name="" value="Login">
+    </form>
+    <a href="login/registration">Don't have an account? Please register to continue. </a>
+  </div>
+  </body>
+</html>
