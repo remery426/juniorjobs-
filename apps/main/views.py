@@ -6,6 +6,10 @@ from ..login.models import User
 from .models import Search
 
 def index(request):
+    try:
+        request.session['currentUser']
+    except:
+        request.session['currentUser'] = ''
     if request.session['currentUser'] != '':
         this_user = User.objects.filter(email = request.session['currentUser'])[0]
         userSearchs = Search.objects.filter(userlist =this_user)
