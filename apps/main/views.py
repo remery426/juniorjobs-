@@ -7,14 +7,15 @@ from .models import Search
 
 def index(request):
     my_user = request.session.get('currentUser')
-    if my_user:
+    print(my_user)
+    try:
         this_user = User.objects.filter(email = request.session['currentUser'])[0]
         userSearchs = Search.objects.filter(userlist =this_user)
         context = {
-            'userMessage' : "Welcome " + request.session['currentUser'],
-            'userSearch' : userSearchs
-                    }
-    else:
+                'userMessage' : "Welcome " + request.session['currentUser'],
+                'userSearch' : userSearchs
+                }
+    except:
         context = {
             'message' : 'Want to save your search history? Click here to login.'
         }
@@ -61,5 +62,5 @@ def histSearch(request, id):
         return render(request,'main/results.html', context)
 
 def logout(request):
-    del request.session['currentUser']
+    request.session['currentUser'] = ''
     return redirect('/')
