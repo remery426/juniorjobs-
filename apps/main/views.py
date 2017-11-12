@@ -9,8 +9,9 @@ def index(request):
     try:
         request.session['currentUser'] == ''
     except:
+        print("except statement")
         request.session['currentUser'] = ''
-    if request.session['currentUser'] != '':
+    if request.session['currentUser']:
         this_user = User.objects.filter(email = request.session['currentUser'])[0]
         userSearchs = Search.objects.filter(userlist =this_user)
         context = {
@@ -18,6 +19,7 @@ def index(request):
             'userSearch' : userSearchs
                     }
     else:
+        print("else statement")
         context = {
             'message' : 'Want to save your search history? Click here to login.'
         }
@@ -64,5 +66,5 @@ def histSearch(request, id):
         return render(request,'main/results.html', context)
 
 def logout(request):
-    request.session['currentUser'] = ''
+    del request.session['currentUser']
     return redirect('/')
