@@ -6,9 +6,8 @@ from ..login.models import User
 from .models import Search
 
 def index(request):
-    if 'currentUser' not in request.session:
-        request.session['currentUser'] = ''
-    if request.session['currentUser'] != '':
+    my_user = request.session.get('currentUser')
+    if my_user:
         this_user = User.objects.filter(email = request.session['currentUser'])[0]
         userSearchs = Search.objects.filter(userlist =this_user)
         context = {
