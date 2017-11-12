@@ -6,15 +6,23 @@ from ..login.models import User
 from .models import Search
 
 def index(request):
-    try:
-        request.session['currentUser']
+    found_request = False
+    while found_request == False:
+        try:
+            request.session['currentUser']
+            found_request = True
+        except:
+            request.session['currentUser'] = ""
+            found_request = False
+
+    if request.session['currentUser'] != "":
         this_user = User.objects.filter(email = request.session['currentUser'])[0]
         userSearchs = Search.objects.filter(userlist =this_user)
         context = {
             'userMessage' : "Welcome " + request.session['currentUser'],
             'userSearch' : userSearchs
                     }
-    except:
+    else:
         print("supp dawg")
         context = {
             'message' : 'Want to save your search history? Click here to login.'
