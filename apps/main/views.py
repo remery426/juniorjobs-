@@ -6,7 +6,7 @@ from ..login.models import User
 from .models import Search
 
 def index(request):
-
+    request.session.setdefault('currentUser','')
     try:
         request.session['currentUser']
         this_user = User.objects.filter(email = request.session['currentUser'])[0]
