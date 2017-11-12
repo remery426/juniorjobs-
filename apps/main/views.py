@@ -14,7 +14,8 @@ def index(request):
             'userMessage' : "Welcome " + request.session['currentUser'],
             'userSearch' : userSearchs
                     }
-    except KeyError:
+    except:
+        print("supp dawg")
         context = {
             'message' : 'Want to save your search history? Click here to login.'
         }
