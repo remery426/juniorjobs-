@@ -7,12 +7,7 @@ from .models import Search
 
 def index(request):
     try:
-        this_user = User.objects.filter(email = request.session['currentUser'])[0]
-        userSearchs = Search.objects.filter(userlist =this_user)
-        context = {
-                'userMessage' : "Welcome " + request.session['currentUser'],
-                'userSearch' : userSearchs
-                }
+        request.session['currentUser']
     except:
         context = {
             'message' : 'Want to save your search history? Click here to login.'
