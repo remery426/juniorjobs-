@@ -14,6 +14,7 @@ def index(request):
                 'userSearch' : userSearchs
                 }
     except:
+        request.session['currentUser'] = ''
         context = {
             'message' : 'Want to save your search history? Click here to login.'
         }
