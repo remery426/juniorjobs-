@@ -6,7 +6,17 @@ from ..login.models import User
 from .models import Search
 
 def index(request):
-
+    try:
+        this_user = User.objects.filter(email = request.session['currentUser'])[0]
+        userSearchs = Search.objects.filter(userlist =this_user)
+        context = {
+                'userMessage' : "Welcome " + request.session['currentUser'],
+                'userSearch' : userSearchs
+                }
+    except:
+        context = {
+            'message' : 'Want to save your search history? Click here to login.'
+        }
     return render(request,'main/index.html',context)
 
 # Create your views here.
