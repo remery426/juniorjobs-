@@ -24,9 +24,7 @@
       <p>{{userMessage}}</p>
       {% endif %}
       <p> Search for the junior role you want on one of the sites in the
-         dropdown and then paste the url of the search results into
-         the form below.  Your results should have a much higher
-          concentration of roles that are actually junior. For best results, copy the url of the second page of search results.  For further instructions click <a href="/instructions"> here</a></p>
+         dropdown menu. For best results, copy the url of the SECOND page of search results and paste into the search bar below.  For further instructions click <a href="/instructions"> here</a></p>
       <form class="" action="/refineSearch" method="post">
         {% csrf_token %}
         Url:<input type="text" name="url" value="">
