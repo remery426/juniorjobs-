@@ -5,6 +5,9 @@ from django.contrib import messages
 from ..login.models import User
 from .models import Search
 
+
+def instructions(request):
+    return render(request,'main/instructions.html')
 def index(request):
     try:
         this_user = User.objects.filter(email = request.session['currentUser'])[0]
