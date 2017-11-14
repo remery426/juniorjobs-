@@ -49,7 +49,6 @@ def parseZip(id, currentUser=None):
         Search.objects.addSearch(id, searchtext, currentUser)
     iter1 = extract(iter1)
     iterations = math.floor(iter1/20)+1
-    print(iterations)
     junior_dict = {}
     bad_words = ["mentor", "mentoring", "Mentor","Mentoring","Guiding more junior peers","couch junior","guide junior","help junior", "teach junior", "assist junior", "senior", "Senior", "Sr.", "sr.", "SR"]
     bad_title = ["Principal", "principal", "sr", "lead", "Lead", "LEAD", "Head", "head"]
@@ -58,11 +57,9 @@ def parseZip(id, currentUser=None):
     page_var = ""
     count = 0
     while add_count <= iterations:
-        print(add_count)
         if add_count>0:
             num_holder = add_count +1
             page_var = "&page=" + str(num_holder)
-        print(str(id)+page_var)
         r = requests.get(str(id)+page_var)
         c = r.content
         soup = BS4(c ,"html.parser")
