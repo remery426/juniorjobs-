@@ -52,14 +52,15 @@ def parseIndeed(id, currentUser=None):
         add_count = 0
         page_var = ""
         count = 0
-
-        while add_count * 15 <= iterations:
+        print(iterations)
+        while add_count * 15 <= iterations and add_count * 15 <= 500:
+            print(add_count*15)
             if add_count>0:
                 num_holder = 10 * add_count
                 page_var = "&start=" + str(num_holder)
             r = requests.get(str(id)+page_var)
             if not r:
-                break 
+                break
             c = r.content
 
             soup = BS4(c ,"html.parser")
@@ -79,7 +80,9 @@ def parseIndeed(id, currentUser=None):
                     junior_dict[y.text]= [y["href"], z]
 
             add_count+=1
-            response['results'] = junior_dict
-            response['original'] = iterations
-            response['newLen'] = len(junior_dict)
+        if iterations> 500:
+            iterations = "500+ (Search size limited to 500 job results)"
+        response['results'] = junior_dict
+        response['original'] = iterations
+        response['newLen'] = len(junior_dict)
         return response

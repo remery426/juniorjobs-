@@ -56,13 +56,14 @@ def parseZip(id, currentUser=None):
     add_count = 0
     page_var = ""
     count = 0
-    while add_count <= iterations:
+    print(iter1)
+    while add_count <= iterations and add_count<=20:
         if add_count>0:
             num_holder = add_count +1
             page_var = "&page=" + str(num_holder)
         r = requests.get(str(id)+page_var)
         if not r:
-            break 
+            break
         c = r.content
         soup = BS4(c ,"html.parser")
         for x, y, z in zip(soup.find_all("p",{"class":"job_snippet"}),soup.find_all("span",{"class":"just_job_title"}), soup.find_all("p",{"class":"job_org"})):
@@ -79,6 +80,9 @@ def parseZip(id, currentUser=None):
             if found_bad == False:
                 junior_dict[y.text] = [x.find("a")['href'], z.text]
         add_count+=1
+    if iter1 > 1000:
+        iter1 = "1000 + (Search size limited to 1000 job results)"
+
     response['results'] = junior_dict
     response['original'] = iter1
     response['newLen'] = len(junior_dict)
