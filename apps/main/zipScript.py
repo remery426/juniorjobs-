@@ -61,6 +61,8 @@ def parseZip(id, currentUser=None):
             num_holder = add_count +1
             page_var = "&page=" + str(num_holder)
         r = requests.get(str(id)+page_var)
+        if not r:
+            break 
         c = r.content
         soup = BS4(c ,"html.parser")
         for x, y, z in zip(soup.find_all("p",{"class":"job_snippet"}),soup.find_all("span",{"class":"just_job_title"}), soup.find_all("p",{"class":"job_org"})):

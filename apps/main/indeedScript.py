@@ -58,6 +58,8 @@ def parseIndeed(id, currentUser=None):
                 num_holder = 10 * add_count
                 page_var = "&start=" + str(num_holder)
             r = requests.get(str(id)+page_var)
+            if not r:
+                break 
             c = r.content
 
             soup = BS4(c ,"html.parser")
