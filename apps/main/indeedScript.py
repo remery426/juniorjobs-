@@ -33,7 +33,7 @@ def parseIndeed(id, currentUser=None):
     if "indeed" not in id:
         response['error_message'] = "URL does not match the specified site"
         return response
-    if "www.indeed.com/m/":
+    if "www.indeed.com/m/" in id:
         response['error_message'] = "Mobile site currently not supported. Please use urls from main site"
         return response
     try:
