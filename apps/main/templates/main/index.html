@@ -23,10 +23,7 @@
       {% if request.session.currentUser %}
       <p>{{userMessage}}</p>
       {% endif %}
-      <p> Search for the junior role you want on one of the sites in the
-         dropdown menu. Copy and paste the url of your search results into the search bar below. When using Indeed, you will have the best results
-         if you copy the url of the second page of search results.
-         You should find that your search results have a much higher concentration or roles that are actually Junior. For further instructions click <a href="/instructions"> here</a></p>
+      <p> This site is designed to help job seekers looking for junior roles. Many times search results on online job boards will include obviously senior roles even when junior is specfied in the search. To use the site, simply search for the junior role you want on Indeed/ZipRecruiter, then copy url and paste it into the search bar below. Select the appropriate site from the dropdown menu then click the search button. The site will filter out many of the obviously senior roles and display a new list of search results. For more information on using the site click <a href="/instructions"> here</a></p>
       <form class="" action="/refineSearch" method="post">
         {% csrf_token %}
         Url:<input type="text" name="url" value="">
@@ -34,7 +31,7 @@
           <option value="Indeed">Indeed</option>
           <option value="Ziprecruiter">ZipRecruiter</option>
         </select>
-        <input type="submit" name="" value="submit">
+        <input type="submit" name="" value="Search">
       </form>
       <div id="error">
         {% if messages %}
